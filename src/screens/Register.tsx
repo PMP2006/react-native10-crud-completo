@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { View, Text, TextInput, Pressable, Alert } from 'react-native';
 import axios from "axios";
 import { styles } from './RegisterStyles';
-import { API_BASE_URL } from "../../apiConfig";
+import { API_BASE } from "../../apiConfig";
 
 export function Register({ navigation }: any) {
   const [nome, setNome] = useState("");
@@ -21,7 +21,7 @@ export function Register({ navigation }: any) {
       const headers: any = { "Content-Type": "application/json" };
       const response = await axios
       //.post("http://192.168.15.113:8000/api/musicas", payload, { headers });
-      .post(`${API_BASE_URL}/api/musicas`, payload, { headers });
+      .post(`${API_BASE}/api/musicas`, payload, { headers });
       Alert.alert("Sucesso", "Música cadastrada com sucesso!");
       console.log("Salvo!");
       navigation.navigate("home");

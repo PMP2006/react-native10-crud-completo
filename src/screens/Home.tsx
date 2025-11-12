@@ -3,7 +3,7 @@ import { View, Text, FlatList, Pressable, Alert, ActivityIndicator } from 'react
 import { Ionicons } from "@expo/vector-icons";
 import styles from './HomeStyles';
 import axios from 'axios';
-import { API_BASE_URL } from "../../apiConfig";
+import { API_BASE} from "../../apiConfig";
 
 export function Home({ navigation }: any) {
     const [musicas, setMusicas] = useState<any[]>([]);
@@ -14,7 +14,7 @@ export function Home({ navigation }: any) {
 
     const carregarMusicas = async () => {
         try {
-            const response = await axios.get(`${API_BASE_URL}/api/musicas`);
+            const response = await axios.get(`${API_BASE}/api/musicas`);
             setMusicas(response.data);
         } catch (err: any) {
             console.error("Erro ao carregar músicas:", err);
@@ -46,11 +46,11 @@ export function Home({ navigation }: any) {
                 </Pressable>
             </View>
 
-            {/* {musicas.length === 0 ? ( */}
-                {/* <View style={{ alignItems: 'center', marginTop: 50 }}> */}
-                    {/* <Text style={{ color: '#ccc' }}>Nenhuma música encontrada.</Text> */}
-                {/* </View> */}
-            {/* ) : ( */}
+            {musicas.length === 0 ? (
+                <View style={{ alignItems: 'center', marginTop: 50 }}>
+                    <Text style={{ color: '#ccc' }}>Nenhuma música encontrada.</Text>
+                </View>
+            ) : ( 
                 <FlatList
                     data={musicas}
                     keyExtractor={(item) => item.id?.toString() || Math.random().toString()}
@@ -72,7 +72,7 @@ export function Home({ navigation }: any) {
                         </View>
                     )}
                 />
-            {/* )} */}
+            )}
         </View>
     );
 }

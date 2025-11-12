@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { View, Text, TextInput, Pressable, Alert } from 'react-native';
 import axios from "axios";
 import { styles } from './EditStyles';
-import { API_BASE_URL } from "../../apiConfig";
+import { API_BASE } from "../../apiConfig";
 
 export function Edit({ route, navigation }: any) {
     const { id } = route.params;
@@ -17,7 +17,7 @@ export function Edit({ route, navigation }: any) {
     useEffect(() => {
         axios
             //.get(`http://192.168.15.113:8000/api/musicas/${id}`)
-            .get(`${API_BASE_URL}/api/musicas/${id}`)
+            .get(`${API_BASE}/api/musicas/${id}`)
             .then(res => setMusica(res.data))
             .catch(err => console.error('Erro ao carregar música:', err));
     }, [id]);
@@ -45,7 +45,7 @@ export function Edit({ route, navigation }: any) {
         console.log(musica);
         axios
             //.put(`http://192.168.15.113:8000/api/musicas/${id}`, musica)
-            .put(`${API_BASE_URL}/api/musicas/${id}`, musica)
+            .put(`${API_BASE}/api/musicas/${id}`, musica)
             .then(() => {
                 Alert.alert('✅ Sucesso', 'Música atualizada com sucesso!');
                 navigation.navigate('home'); // volta pra Home
@@ -58,7 +58,7 @@ export function Edit({ route, navigation }: any) {
     const deletarMusica = (id: number) => {
         axios
             //.delete(`http://192.168.15.113:8000/api/musicas/${id}`)
-            .delete(`${API_BASE_URL}/api/musicas/${id}`)
+            .delete(`${API_BASE}/api/musicas/${id}`)
             .then(() => {
                 // Atualiza a lista localmente sem precisar recarregar
                 //setMusicas(musicas.filter((item) => item.id !== id));
